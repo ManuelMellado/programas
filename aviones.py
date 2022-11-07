@@ -419,7 +419,7 @@ distanciasM=[]
 distanciasMT=[]
 distanciasMW=[]
 distanciasMTW=[]
-pool=mp.Pool(2)
+pool=mp.Pool(64)
 results=pool.starmap(distancias,[(i,q) for i in range(0,len(puntosiniciales))])
 pool.close()
 for i in results:
