@@ -413,7 +413,19 @@ def distancias(i,q):
     diagrams1_2= q["DAA"]
     diagrams2_1= q["DB"]
     diagrams2_2= q["DBB"]
-    return [persim.bottleneck(diagrams1_1, diagrams2_1),persim.wasserstein(diagrams1_1,diagrams2_1),persim.bottleneck(diagrams1_2,diagrams2_2),persim.wasserstein(diagrams1_2,diagrams2_2)]
+    d1=Thread(target=bottleneckdic,args=(diagrams1_1, diagrams2_1,"D1",q))
+    d2=Thread(target=wassersdic,args=(diagrams1_1,diagrams2_1,"D2",q))
+    d3=Thread(target=bottleneckdic,args=(diagrams1_2,diagrams2_2,"D3",q))
+    d4=Thread(target=wassersdic,args=(diagrams1_2,diagrams2_2,"D4",q))
+    d1.start()
+    d2.start()
+    d3.start()
+    d4.start()
+    d1.join()
+    d2.join()
+    d3.join()
+    d4.join()
+    return [q["D1"],q["D2"],q["D3"],q["D4"]]
 q={}
 distanciasM=[]
 distanciasMT=[]
