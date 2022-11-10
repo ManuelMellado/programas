@@ -34,7 +34,7 @@ from sklearn import datasets
 from scipy.spatial.distance import cdist
 import tadasets
 from persim import plot_diagrams, bottleneck
-path = r'islandia'
+path = r'galesaviones'
 all_files = glob.glob(path + "/*.ALL_FT+")
 all_files.sort()
 liiniciales = []
@@ -419,9 +419,12 @@ distanciasM=[]
 distanciasMT=[]
 distanciasMW=[]
 distanciasMTW=[]
-pool=mp.Pool(20)
-results=pool.starmap(distancias,[(i,q) for i in range(0,len(puntosiniciales))])
-pool.close()
+if __name__ == '__main__':
+    
+    pool=mp.Pool(6)
+    results=pool.starmap(distancias,[(i,q) for i in range(0,4)])
+    pool.close()
+    pool.join()
 for i in results:
     distanciasM.append(i[0])
     distanciasMW.append(i[1])
