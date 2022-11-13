@@ -378,6 +378,10 @@ def matricestiempos(i,tiempos,nombre,q):
     q[nombre]=sklearn.metrics.pairwise_distances(np.array(tiempos[i]).reshape(-1,1),np.array(tiempos[i]).reshape(-1,1),metric='l1')
 def diagramas(matriz,nombre,q):
     q[nombre]=ripser(matriz,distance_matrix=True)['dgms'][1]
+def bottleneckdic(diag1,diag2,nombre,q):
+    q[nombre]=persim.bottleneck(diag1,diag2)
+def wassersdic(diag1,diag2,nombre,q):
+    q[nombre]=persim.wasserstein(diag1,diag2)
 def distancias(i,q):
     t1=Thread(target=matricesportrozos,args=(1000,puntosiniciales,i,q,"A"))
     t2=Thread(target=matricestiempos,args=(i,tiemposiniciales,"A2",q))
@@ -434,7 +438,7 @@ distanciasMTW=[]
 if __name__ == '__main__':
     
     pool=mp.Pool(6)
-    results=pool.starmap(distancias,[(i,q) for i in range(0,4)])
+    results=pool.starmap(distancias,[(i,q) for i in range(0,6)])
     pool.close()
     pool.join()
 for i in results:
