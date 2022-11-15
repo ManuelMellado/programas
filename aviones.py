@@ -34,7 +34,7 @@ from sklearn import datasets
 from scipy.spatial.distance import cdist
 import tadasets
 from persim import plot_diagrams, bottleneck
-path = r'galesaviones'
+path = r'gales'
 all_files = glob.glob(path + "/*.ALL_FT+")
 all_files.sort()
 liiniciales = []
@@ -223,6 +223,35 @@ for i in range(0,len(tiemposfinaleslista)):
         for p in tiemposfinaleslista[i][j]:
             if len(p)!=14:
                 tiemposfinaleslista[i][j].remove(p)
+for i in range(0,len(tiemposinicialeslista)):
+  for j in range(0,len(tiemposinicialeslista[i])):
+    if len(tiemposinicialeslista[i][j])!=len(datosimportantesiniciallista[i][j]):
+      año=rowsdepurfin[i][j][1][0:4]
+      año1=str(int(año)+1)
+      A=re.findall(f'{año1}(.*?):',rowsdepurini[i][j][1])
+      for p in range(len(A)):
+        A[p]=año1+A[p]
+      for k in A:
+        tiemposinicialeslista[i][j].append(k)
+  for j in range(0,len(tiemposfinaleslista[i])):
+    if len(tiemposfinaleslista[i][j])!=len(datosimportantesfinallista[i][j]):
+      año=rowsdepurfin[i][j][1][0:4]
+      año1=str(int(año)+1)
+      A=re.findall(f'{año1}(.*?):',rowsdepurfin[i][j][1])
+      for p in range(len(A)):
+        A[p]=año1+A[p]
+      for k in A:
+        tiemposfinaleslista[i][j].append(k)
+for i in range(0,len(tiemposinicialeslista)):
+    for j in range(0,len(tiemposinicialeslista[i])):
+        for p in tiemposinicialeslista[i][j]:
+            if len(p)!=14:
+                tiemposinicialeslista[i][j].remove(p)
+for i in range(0,len(tiemposfinaleslista)):
+    for j in range(0,len(tiemposfinaleslista[i])):
+        for p in tiemposfinaleslista[i][j]:
+            if len(p)!=14:
+                tiemposfinaleslista[i][j].remove(p)
 horasinicialeslista=[]
 horasfinaleslista=[]
 stupid_times=datetime.datetime(1,1,1,0,0,0)
@@ -332,8 +361,8 @@ for i in horasfinaleslista:
         for k in j:
             tiempos.append(k)
     tiemposfinales.append(tiempos)
-def matricespara(dict,puntos,puntos2,nombre):
-    dict[nombre]=cdist(puntos,puntos2,metric=haversine)
+def matricespara(dic,puntos,puntos2,nombre):
+    dic[nombre]=cdist(puntos,puntos2,metric=haversine)
 def matricesportrozos(k,tipodepuntos,p,dict2,nombre):
     q={}
     h=math.floor(len(tipodepuntos[p])/k)
@@ -437,7 +466,7 @@ distanciasMW=[]
 distanciasMTW=[]
 if __name__ == '__main__':
     
-    pool=mp.Pool(6)
+    pool=mp.Pool(12)
     results=pool.starmap(distancias,[(i,q) for i in range(0,6)])
     pool.close()
     pool.join()
