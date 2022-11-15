@@ -34,7 +34,7 @@ from sklearn import datasets
 from scipy.spatial.distance import cdist
 import tadasets
 from persim import plot_diagrams, bottleneck
-path = r'gales'
+path = r'galesaviones'
 all_files = glob.glob(path + "/*.ALL_FT+")
 all_files.sort()
 liiniciales = []
