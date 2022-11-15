@@ -467,7 +467,7 @@ distanciasMTW=[]
 if __name__ == '__main__':
     
     pool=mp.Pool(12)
-    results=pool.starmap(distancias,[(i,q) for i in range(0,6)])
+    results=pool.starmap(distancias,[(i,q) for i in range(0,len(puntosiniciales)])
     pool.close()
     pool.join()
 for i in results:
@@ -480,7 +480,7 @@ df2 = pandas.DataFrame(data={"col1": distanciasM})
 df3 = pandas.DataFrame(data={"col1": distanciasMT})
 df4 = pandas.DataFrame(data={"col1": distanciasMW})
 df5 = pandas.DataFrame(data={"col1": distanciasMTW})
-df2.to_csv("./distanciasislandia1819M.csv",sep=',',index=False)
-df3.to_csv("./distanciasislandia1819MT.csv",sep=',',index=False)
-df3.to_csv("./distanciasislandia1819MW.csv",sep=',',index=False)
-df4.to_cvs("./distanciasislandia1819MTW.csv",sep=',',index=False)
+df2.to_csv("./distanciasgales1819M.csv",sep=',',index=False)
+df3.to_csv("./distanciasgales1819MT.csv",sep=',',index=False)
+df4.to_csv("./distanciasgales1819MW.csv",sep=',',index=False)
+df5.to_cvs("./distanciasgales1819MTW.csv",sep=',',index=False)
