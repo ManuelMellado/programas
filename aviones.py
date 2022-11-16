@@ -411,7 +411,7 @@ def bottleneckdic(diag1,diag2,nombre,q):
     q[nombre]=persim.bottleneck(diag1,diag2)
 def wassersdic(diag1,diag2,nombre,q):
     q[nombre]=persim.wasserstein(diag1,diag2)
-def distancias(i,q):
+def distancias(i,q,k):
     t1=Thread(target=matricesportrozos,args=(1000,puntosiniciales,i,q,"A"))
     t2=Thread(target=matricestiempos,args=(i,tiemposiniciales,"A2",q))
     t3=Thread(target=matricesportrozos,args=(1000,puntosfinales,i,q,"B"))
@@ -458,16 +458,19 @@ def distancias(i,q):
     d2.join()
     d3.join()
     d4.join()
+    k=k+1
+    print(k)
     return [q["D1"],q["D2"],q["D3"],q["D4"]]
 q={}
 distanciasM=[]
 distanciasMT=[]
 distanciasMW=[]
 distanciasMTW=[]
+p=0
 if __name__ == '__main__':
     
-    pool=mp.Pool(6)
-    results=pool.starmap(distancias,[(i,q) for i in range(0,len(puntosiniciales))])
+    pool=mp.Pool(4)
+    results=pool.starmap(distancias,[(i,q,p) for i in range(0,len(puntosiniciales))])
     pool.close()
     pool.join()
 for i in results:
