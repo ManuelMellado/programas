@@ -467,7 +467,7 @@ distanciasMTW=[]
 if __name__ == '__main__':
     
     pool=mp.Pool(12)
-    results=pool.starmap(distancias,[(i,q) for i in range(0,len(puntosiniciales)])
+    results=pool.starmap(distancias,[(i,q) for i in range(0,len(puntosiniciales))])
     pool.close()
     pool.join()
 for i in results:
