@@ -7,11 +7,12 @@
 #SBATCH -w cibeles2-300
 #SBATCH -w cibeles2-327
 #SBATCH -w cibeles2-330
+#SBATCH --cpus-per-task=32
+#SBATCH --mem-per-cpu=MaxMemPerCPU
 #SBATCH --mail-type=FAIL,END
 #SBATCH --mail-user=manuel.mellado@uam.es
 module load anaconda/anaconda3
-module load MODULE_NECESARIO
 
-mpirun -np 32 ejecutable
+mpirun -np 12 ejecutable
 
 srun python aviones2.py
