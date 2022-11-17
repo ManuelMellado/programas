@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --time=3-00:00:00
-#SBATCH --ntasks=1
+#SBATCH --ntasks=3
 #SBATCH --nodes=3
 #SBATCH --account=mmellado_serv
 #SBATCH --partition=cccmd
