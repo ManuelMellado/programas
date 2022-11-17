@@ -411,7 +411,8 @@ def bottleneckdic(diag1,diag2,nombre,q):
     q[nombre]=persim.bottleneck(diag1,diag2)
 def wassersdic(diag1,diag2,nombre,q):
     q[nombre]=persim.wasserstein(diag1,diag2)
-def distancias(i,q,k):
+def distancias(i,q):
+    print(f"Empezando proceso{i}")
     t1=Thread(target=matricesportrozos,args=(1000,puntosiniciales,i,q,"A"))
     t2=Thread(target=matricestiempos,args=(i,tiemposiniciales,"A2",q))
     t3=Thread(target=matricesportrozos,args=(1000,puntosfinales,i,q,"B"))
@@ -458,19 +459,17 @@ def distancias(i,q,k):
     d2.join()
     d3.join()
     d4.join()
-    k=k+1
-    print(k)
+    print(f"Terminando proceso {i}")
     return [q["D1"],q["D2"],q["D3"],q["D4"]]
 q={}
 distanciasM=[]
 distanciasMT=[]
 distanciasMW=[]
 distanciasMTW=[]
-p=0
 if __name__ == '__main__':
     
-    pool=mp.Pool(4)
-    results=pool.starmap(distancias,[(i,q,p) for i in range(0,len(puntosiniciales))])
+    pool=mp.Pool(12)
+    results=pool.starmap(distancias,[(i,q) for i in range(0,50)])
     pool.close()
     pool.join()
 for i in results:
@@ -483,7 +482,7 @@ df2 = pandas.DataFrame(data={"col1": distanciasM})
 df3 = pandas.DataFrame(data={"col1": distanciasMT})
 df4 = pandas.DataFrame(data={"col1": distanciasMW})
 df5 = pandas.DataFrame(data={"col1": distanciasMTW})
-df2.to_csv("./distanciasgales1819M.csv",sep=',',index=False)
-df3.to_csv("./distanciasgales1819MT.csv",sep=',',index=False)
-df4.to_csv("./distanciasgales1819MW.csv",sep=',',index=False)
-df5.to_cvs("./distanciasgales1819MTW.csv",sep=',',index=False)
+df2.to_csv("./distanciasgales1819M1.csv",sep=',',index=False)
+df3.to_csv("./distanciasgales1819MT1.csv",sep=',',index=False)
+df4.to_csv("./distanciasgales1819MW1.csv",sep=',',index=False)
+df5.to_cvs("./distanciasgales1819MTW1.csv",sep=',',index=False)
