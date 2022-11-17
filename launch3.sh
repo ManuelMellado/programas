@@ -11,6 +11,6 @@
 #SBATCH --mail-user=manuel.mellado@uam.es
 module load anaconda/anaconda3
 
-mpirum -np 32 ejecutable
+mpirun -np 32 ejecutable
 
 srun python aviones2.py
