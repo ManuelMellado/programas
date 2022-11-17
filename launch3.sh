@@ -10,6 +10,7 @@
 #SBATCH --mail-type=FAIL,END
 #SBATCH --mail-user=manuel.mellado@uam.es
 module load anaconda/anaconda3
+module load MODULE_NECESARIO
 
 mpirun -np 32 ejecutable
 
