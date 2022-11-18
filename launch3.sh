@@ -1,5 +1,4 @@
 #!/bin/bash
-#SBATCH --time=3-00:00:00
 #SBATCH --ntasks=3
 #SBATCH --nodes=3
 #SBATCH --account=mmellado_serv
@@ -12,6 +11,7 @@
 #SBATCH --mail-type=FAIL,END
 #SBATCH --mail-user=manuel.mellado@uam.es
 module load anaconda/anaconda3
+module load openmpi/intel/4.0.2-intel2020
 
 mpirun -np 12 ejecutable
 
