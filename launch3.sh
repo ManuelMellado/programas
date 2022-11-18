@@ -5,7 +5,7 @@
 #SBATCH --partition=cccmd
 #SBATCH -w cibeles2-300
 #SBATCH -w cibeles2-327
-#SBATCH -w cibeles2-330
+#SBATCH -w cibeles2-318
 #SBATCH --cpus-per-task=32
 #SBATCH --mem-per-cpu=MaxMemPerCPU
 #SBATCH --mail-type=FAIL,END
