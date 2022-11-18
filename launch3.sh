@@ -13,6 +13,6 @@
 module load anaconda/anaconda3
 module load openmpi/intel/4.0.2-intel2020
 
-mpirun -np 12 ejecutable
+mpirun -np 12 aviones2.py
 
 srun python aviones2.py
